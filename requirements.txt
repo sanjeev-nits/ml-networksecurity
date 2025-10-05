@@ -7,5 +7,7 @@ seaborn
 flask
 pymongo
 certifi
+pyyaml
+dill
 
 # -e .
