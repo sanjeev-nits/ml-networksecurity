@@ -38,3 +38,36 @@ def write_yaml_file(file_path:str,content:object,replace:bool=False)->None:
             yaml.dump(content, file)
     except Exception as e:
         raise NetworkSecurityError(e, sys) from e
+    
+
+def save_numpy_array_data(file_path:str,array:np.array)->None:
+    """
+    Saves a numpy array to a file.
+
+    Args:
+        file_path (str): The path to the file where the array will be saved.
+        array (np.array): The numpy array to save.
+    """
+    try:
+        dir_path=os.path.dirname(file_path)
+        os.makedirs(dir_path,exist_ok=True)
+        with open(file_path,'wb') as file_obj:
+            np.save(file_obj,array)
+    except Exception as e:
+        raise NetworkSecurityError(e, sys) from e
+    
+def save_object(file_path:str,obj:object)->None:
+    """
+    Saves a Python object to a file using pickle.
+
+    Args:
+        file_path (str): The path to the file where the object will be saved.
+        obj (object): The Python object to save.
+    """
+    try:
+        dir_path=os.path.dirname(file_path)
+        os.makedirs(dir_path,exist_ok=True)
+        with open(file_path,'wb') as file_obj:
+            pickle.dump(obj,file_obj)
+    except Exception as e:
+        raise NetworkSecurityError(e, sys) from e

@@ -36,3 +36,19 @@ DATA_VALIDATION_VALID_DIR="validated"
 DATA_VALIDATION_INVALID_DIR="invalid"
 DATA_VALIDATION_DRIFT_REPORT_DIR="drift_report"
 DATA_VALIDATION_DRIFT_REPORT_FILE_NAME="report.yaml"
+
+
+
+"""Data Transformation Constants start with DATA_TRANSFORMATION VAR name"""
+
+DATA_TRANSFORMATION_DIR_NAME: str="data_transformation"
+DATA_TRANSFORMATION_TRANSFORMED_DATA_DIR: str="transformed"
+DATA_TRANSFORMATION_TRANSFROMED_OBJECT_DIR: str="transformed_object"
+PREPROCESSING_OBJECT_FILE_NAME: str="preprocessing.pkl"
+
+#knn imputer object file name
+DATA_TRANSFOMATION_IMPUTER_OBJECT_FILE_NAME: dict={
+    'missing_values': np.nan,
+    'n_neighbors': 3,
+    'weights': 'uniform',
+}
