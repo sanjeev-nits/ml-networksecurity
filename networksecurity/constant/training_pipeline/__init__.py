@@ -52,3 +52,12 @@ DATA_TRANSFOMATION_IMPUTER_OBJECT_FILE_NAME: dict={
     'n_neighbors': 3,
     'weights': 'uniform',
 }
+
+"""Model Trainer Constants start with MODEL_TRAINER VAR name"""
+
+SAVE_MODEL_DIR:str=os.path.join("saved_models")
+MODEL_TRAINER_DIR_NAME: str="model_trainer"
+MODEL_TRAINER_TRAINED_MODEL_DIR: str="trained_model"
+MODEL_FILE_NAME: str="model.pkl"
+MODEL_TRAINER_EXPECTED_SCORE: float=0.7
+MODEL_TRAINER_OVERFITTING_THRESHOLD: float=0.05
