@@ -1,7 +1,9 @@
 import sys
 import os
+import mlflow
 from networksecurity.entity.artifact_entity import DataTransformationArtifact,ModelTrainerArtifact
 from networksecurity.entity.config_entity import ModelTrainerConfig
+from networksecurity.entity.config_entity import DataTransformationConfig
 
 from networksecurity.exception.exceptions import NetworkSecurityError
 from networksecurity.logging.logger import logging
@@ -28,6 +30,8 @@ from sklearn.ensemble import (RandomForestClassifier,
 
 
 
+
+
 class ModelTrainer:
     def __init__(self,model_trainer_config:ModelTrainerConfig,
                  data_transformation_artifact:DataTransformationArtifact):
@@ -36,7 +40,19 @@ class ModelTrainer:
             self.model_trainer_config=model_trainer_config
             self.data_transformation_artifact=data_transformation_artifact
         except Exception as e:
-            raise NetworkSecurityError(e,sys) from e   
+            raise NetworkSecurityError(e,sys) from e 
+
+    def track_mlflow(self,model,classificationmetric):  
+        with mlflow.start_run():
+            f1_score=classificationmetric.f1_score
+            precision_score=classificationmetric.precision_score
+            recall_score=classificationmetric.recall_score
+
+            mlflow.log_metric("f1_score",f1_score)
+            mlflow.log_metric("precision_score",precision_score)
+            mlflow.log_metric("recall_score",recall_score)
+            mlflow.sklearn.log_model(sk_model=model, name="model")
+            
 
     def train_model(self,x_train,y_train,x_test,y_test):
         try:
@@ -53,8 +69,8 @@ class ModelTrainer:
                 },
                 "DecisionTree":{
                     'criterion':['gini','entropy','log_loss'],
-                    # 'splitter':['best','random'],
-                    # 'max_features':['sqrt','log2']
+                    'splitter':['best','random'],
+                    'max_features':['sqrt','log2']
                 },
                 "LinearRegression":{
                     'penalty':['l1','l2','elasticnet','none'],
@@ -83,9 +99,12 @@ class ModelTrainer:
             classification_train_metric=get_classification_score(y_true=y_train,y_pred=y_train_pred)
 
             ## track the MLflow
+            self.track_mlflow(best_model,classification_train_metric)
             
             y_test_pred=best_model.predict(x_test)
             classification_test_metric=get_classification_score(y_true=y_test,y_pred=y_test_pred)
+
+            self.track_mlflow(best_model,classification_test_metric)
 
             preprocessor=load_object(file_path=self.data_transformation_artifact.preprocessed_object_file_path)
             model_dir_path=os.path.dirname(self.model_trainer_config.trained_model_file_path)
