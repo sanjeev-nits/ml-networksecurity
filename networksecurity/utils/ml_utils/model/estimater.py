@@ -21,7 +21,7 @@ class NetworkModel:
             logging.info("Prediction started")
             x_transformed=self.preprocessor.transform(X)
             logging.info("Preprocessing completed")
-            y_pred=self.model.predict(X)
+            y_pred=self.model.predict(x_transformed)
             logging.info("Prediction completed")
             return y_pred
         except Exception as e:
