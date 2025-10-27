@@ -29,6 +29,9 @@ import mlflow
 import mlflow.sklearn
 from mlflow.models import infer_signature
 
+import dagshub
+dagshub.init(repo_owner='sanjeevkumar814155', repo_name='ml-networksecurity', mlflow=True)
+
 
 class ModelTrainer:
     def __init__(self,model_trainer_config:ModelTrainerConfig,data_transformation_artifacts:DataTransformationArtifact):
@@ -66,7 +69,7 @@ class ModelTrainer:
             # Log the model with the correct artifact_path, signature, and input example
             mlflow.sklearn.log_model(
                 sk_model=best_model,
-                name="model",
+                artifact_path="model",
                 signature=signature,
                 input_example=X_train[[0]] # Use the first row as a small input example
             )

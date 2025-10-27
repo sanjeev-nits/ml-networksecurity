@@ -10,6 +10,6 @@ certifi
 pyyaml
 dill
 
-mlflow
-degshub
+mlflow==2.2.2
+dagshub
 # -e .
