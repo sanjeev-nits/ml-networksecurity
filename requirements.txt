@@ -9,6 +9,7 @@ pymongo
 certifi
 pyyaml
 dill
-mlflow==1.30.0
+
+mlflow
 degshub
 # -e .

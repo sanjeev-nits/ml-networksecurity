@@ -25,6 +25,10 @@ from sklearn.ensemble import (
     GradientBoostingClassifier,
     RandomForestClassifier
 )
+import mlflow
+import mlflow.sklearn
+from mlflow.models import infer_signature
+
 
 class ModelTrainer:
     def __init__(self,model_trainer_config:ModelTrainerConfig,data_transformation_artifacts:DataTransformationArtifact):
@@ -34,6 +38,38 @@ class ModelTrainer:
             self.data_transfer_artifacts=data_transformation_artifacts
         except Exception as e:
             raise NetworkSecurityError(e,sys)
+        
+    def track_mlflow(self,best_model, classification_metric, X_train):
+        """
+        Logs model metrics and the trained model to MLflow.
+        
+        Args:
+            best_model: The trained scikit-learn model object.
+            classification_metric: An object containing classification metrics.
+            X_train: A sample of your training data (e.g., a pandas DataFrame).
+        """
+        with mlflow.start_run():
+            # Access metrics from the classification_metric object
+            f1_score = classification_metric.f1_score
+            precision_score = classification_metric.precision_score
+            recall_score = classification_metric.recall_score
+
+            # Log the metrics
+            mlflow.log_metric("f1_score", f1_score)
+            mlflow.log_metric("precision score", precision_score)
+            mlflow.log_metric("recall_score", recall_score)
+
+            # Infer the model signature from the training data
+            predictions = best_model.predict(X_train)
+            signature = infer_signature(X_train, predictions)
+
+            # Log the model with the correct artifact_path, signature, and input example
+            mlflow.sklearn.log_model(
+                sk_model=best_model,
+                name="model",
+                signature=signature,
+                input_example=X_train[[0]] # Use the first row as a small input example
+            )
         
 
     def train_model(self,x_train,y_train,x_test,y_test):
@@ -59,11 +95,11 @@ class ModelTrainer:
             },
             "Gradient Boosting":{
                 # 'loss':['log_loss', 'exponential'],
-                'learning_rate':[.1,.01,.05,.001],
-                'subsample':[0.6,0.7,0.75,0.85,0.9],
+                'learning_rate':[.1,.001],
+                'subsample':[0.6,0.7,0.75],
                 # 'criterion':['squared_error', 'friedman_mse'],
                 # 'max_features':['auto','sqrt','log2'],
-                'n_estimators': [8,16,32,64,128,256]
+                'n_estimators': [8,16,32,256]
             },
             "Logistic Regression":{},
             
@@ -83,13 +119,18 @@ class ModelTrainer:
         y_train_pred=best_model.predict(x_train)
 
         classification_train_metric= get_classification_score(y_true=y_train,y_pred=y_train_pred)
+        logging.info(f"classification train metric:{classification_train_metric}")
 
-        ## track the ml flow
+        ## track exprement with the mlflow
+        self.track_mlflow(best_model,classification_train_metric,x_train)
+        
 
 
         y_test_pred=best_model.predict(x_test)
 
         classification_test_metric= get_classification_score(y_true=y_test,y_pred=y_test_pred)
+        logging.info(f"classification test metric:{classification_test_metric}")
+        self.track_mlflow(best_model,classification_test_metric,x_test)
 
         preprocessor=load_object(file_path=self.data_transfer_artifacts.preprocessed_object_file_path)
 
@@ -128,4 +169,8 @@ class ModelTrainer:
             model=self.train_model(x_train,y_train,x_test,y_test)
         except Exception as e:
             raise NetworkSecurityError(e,sys)
+        
+
+
+
         

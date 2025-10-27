@@ -1,0 +1,62 @@
+[2025-10-27 18:29:23,918] 18 root - INFO - Initiate the data ingestion
+[2025-10-27 18:29:23,919] 31 root - INFO - Export MongoDB collection as a pandas dataframe
+[2025-10-27 18:29:28,149] 45 root - INFO - Connected to MongoDB database: SANJEEV and collection: Networkdata
+[2025-10-27 18:29:28,201] 60 root - INFO - Exported data into feature store at D:\SANJEEV KUMAR\END TO END MASTER PROJECT\Network Security\artifact\10272025__182923\data_ingestion\feature_store\phisingData.csv
+[2025-10-27 18:29:28,252] 75 root - INFO - Split data into train and test set at D:\SANJEEV KUMAR\END TO END MASTER PROJECT\Network Security\artifact\10272025__182923\data_ingestion\ingested\train.csv and D:\SANJEEV KUMAR\END TO END MASTER PROJECT\Network Security\artifact\10272025__182923\data_ingestion\ingested\test.csv
+[2025-10-27 18:29:28,253] 21 root - INFO - Data Ingestion artifact:DataIngestionArtifact(train_file_path='D:\\SANJEEV KUMAR\\END TO END MASTER PROJECT\\Network Security\\artifact\\10272025__182923\\data_ingestion\\ingested\\train.csv', test_file_path='D:\\SANJEEV KUMAR\\END TO END MASTER PROJECT\\Network Security\\artifact\\10272025__182923\\data_ingestion\\ingested\\test.csv')
+[2025-10-27 18:29:28,253] 22 root - INFO - Data ingestion completed and moving to data validation
+[2025-10-27 18:29:28,253] 17 root - INFO - >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Data Validation <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+[2025-10-27 18:29:28,257] 25 root - INFO - Initiate the data validation
+[2025-10-27 18:29:28,331] 35 root - INFO - Required number of columns: 31
+[2025-10-27 18:29:28,331] 36 root - INFO - Dataframe has columns: 31
+[2025-10-27 18:29:28,333] 52 root - INFO - Same distribution having_IP_Address
+[2025-10-27 18:29:28,335] 52 root - INFO - Same distribution URL_Length
+[2025-10-27 18:29:28,336] 52 root - INFO - Same distribution Shortining_Service
+[2025-10-27 18:29:28,338] 52 root - INFO - Same distribution having_At_Symbol
+[2025-10-27 18:29:28,339] 52 root - INFO - Same distribution double_slash_redirecting
+[2025-10-27 18:29:28,342] 52 root - INFO - Same distribution Prefix_Suffix
+[2025-10-27 18:29:28,344] 52 root - INFO - Same distribution having_Sub_Domain
+[2025-10-27 18:29:28,348] 52 root - INFO - Same distribution SSLfinal_State
+[2025-10-27 18:29:28,351] 52 root - INFO - Same distribution Domain_registeration_length
+[2025-10-27 18:29:28,352] 52 root - INFO - Same distribution Favicon
+[2025-10-27 18:29:28,353] 52 root - INFO - Same distribution port
+[2025-10-27 18:29:28,354] 52 root - INFO - Same distribution HTTPS_token
+[2025-10-27 18:29:28,360] 52 root - INFO - Same distribution Request_URL
+[2025-10-27 18:29:28,362] 52 root - INFO - Same distribution URL_of_Anchor
+[2025-10-27 18:29:28,365] 52 root - INFO - Same distribution Links_in_tags
+[2025-10-27 18:29:28,367] 52 root - INFO - Same distribution SFH
+[2025-10-27 18:29:28,368] 52 root - INFO - Same distribution Submitting_to_email
+[2025-10-27 18:29:28,369] 52 root - INFO - Same distribution Abnormal_URL
+[2025-10-27 18:29:28,371] 52 root - INFO - Same distribution Redirect
+[2025-10-27 18:29:28,372] 52 root - INFO - Same distribution on_mouseover
+[2025-10-27 18:29:28,373] 52 root - INFO - Same distribution RightClick
+[2025-10-27 18:29:28,375] 52 root - INFO - Same distribution popUpWidnow
+[2025-10-27 18:29:28,375] 52 root - INFO - Same distribution Iframe
+[2025-10-27 18:29:28,378] 52 root - INFO - Same distribution age_of_domain
+[2025-10-27 18:29:28,379] 52 root - INFO - Same distribution DNSRecord
+[2025-10-27 18:29:28,384] 52 root - INFO - Same distribution web_traffic
+[2025-10-27 18:29:28,389] 52 root - INFO - Same distribution Page_Rank
+[2025-10-27 18:29:28,393] 52 root - INFO - Same distribution Google_Index
+[2025-10-27 18:29:28,397] 52 root - INFO - Same distribution Links_pointing_to_page
+[2025-10-27 18:29:28,397] 52 root - INFO - Same distribution Statistical_report
+[2025-10-27 18:29:28,401] 52 root - INFO - Same distribution Result
+[2025-10-27 18:29:28,452] 27 root - INFO - >>data validation completed  <<
+[2025-10-27 18:29:28,453] 23 root - INFO - >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> Data Transformation <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+[2025-10-27 18:29:28,453] 32 root - INFO - Initiate the data transformation
+[2025-10-27 18:29:28,453] 49 root - INFO - Reading training and test data
+[2025-10-27 18:29:28,532] 38 root - INFO - entre the get data transformer object method
+[2025-10-27 18:29:28,532] 61 root - INFO - Applying preprocessing object on training and testing dataframe
+[2025-10-27 18:29:28,538] 69 root - INFO - Saved transformed training and testing array
+[2025-10-27 18:29:28,548] 82 root - INFO - Data transformation artifact:DataTransformationArtifact(transformed_train_file_path='D:\\SANJEEV KUMAR\\END TO END MASTER PROJECT\\Network Security\\artifact\\10272025__182923\\data_transformation\\transformed\\train.npy', transformed_test_file_path='D:\\SANJEEV KUMAR\\END TO END MASTER PROJECT\\Network Security\\artifact\\10272025__182923\\data_transformation\\transformed\\test.npy', preprocessed_object_file_path='D:\\SANJEEV KUMAR\\END TO END MASTER PROJECT\\Network Security\\artifact\\10272025__182923\\data_transformation\\transformed_object\\preprocessing.pkl')
+[2025-10-27 18:29:28,549] 34 root - INFO - Data transformation artifact:DataTransformationArtifact(transformed_train_file_path='D:\\SANJEEV KUMAR\\END TO END MASTER PROJECT\\Network Security\\artifact\\10272025__182923\\data_transformation\\transformed\\train.npy', transformed_test_file_path='D:\\SANJEEV KUMAR\\END TO END MASTER PROJECT\\Network Security\\artifact\\10272025__182923\\data_transformation\\transformed\\test.npy', preprocessed_object_file_path='D:\\SANJEEV KUMAR\\END TO END MASTER PROJECT\\Network Security\\artifact\\10272025__182923\\data_transformation\\transformed_object\\preprocessing.pkl')
+[2025-10-27 18:29:28,549] 35 root - INFO - >>data transformation completed  <<
+[2025-10-27 18:29:28,549] 40 root - INFO - Initiate the model trainer
+[2025-10-27 18:29:35,198] 134 root - INFO - Random Forest : Train Score : 0.9620128335776966 Test Score : 0.8617871609795129
+[2025-10-27 18:29:35,335] 134 root - INFO - Decision Tree : Train Score : 0.9620128335776966 Test Score : 0.8507301338578739
+[2025-10-27 18:29:52,387] 134 root - INFO - AdaBoost : Train Score : 0.6983910521409893 Test Score : 0.7014602677157479
+[2025-10-27 18:29:52,508] 134 root - INFO - Logistic Regression : Train Score : 0.7166981202963162 Test Score : 0.6922460784477154
+[2025-10-27 18:29:52,727] 122 root - INFO - classification train metric:ClassificationMetricArtifact(f1_score=0.9915521628498728, precision_score=0.9894373349583587, recall_score=0.9936760505915953)
+[2025-10-27 18:30:00,805] 134 root - INFO - classification test metric:ClassificationMetricArtifact(f1_score=0.970367443698143, precision_score=0.9623824451410659, recall_score=0.9784860557768924)
+[2025-10-27 18:30:05,766] 151 root - INFO - MODEL TRAINER ARTIFACT:ModelTrainerArtifact(trained_model_file_path='D:\\SANJEEV KUMAR\\END TO END MASTER PROJECT\\Network Security\\artifact\\10272025__182923\\model_trainer\\model_trainer\\model.pkl', train_metric_artifact=ClassificationMetricArtifact(f1_score=0.9915521628498728, precision_score=0.9894373349583587, recall_score=0.9936760505915953), test_metric_artifact=ClassificationMetricArtifact(f1_score=0.970367443698143, precision_score=0.9623824451410659, recall_score=0.9784860557768924))
+[2025-10-27 18:30:05,769] 42 root - INFO - Model trainer artifact:None
+[2025-10-27 18:30:05,769] 43 root - INFO - >>>>>>>>>>>>>>>>>>>model training completed  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
